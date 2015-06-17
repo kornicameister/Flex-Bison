@@ -1,23 +1,20 @@
-#include "global.h"
-void
-emit (int t, int tval) 
-{
-  switch (t)
-    
-    {
+#include "parser.h"
+
+void emit (int t, int tval) {
+  switch (t) {
     case '+':
     case '-':
     case '*':
     case '/':
       printf ("%c\n", t);
       break;
-    case DIV:
+    case DIVTOKEN:
       printf ("DIV\n");
       break;
-    case MOD:
+    case MODTOKEN:
       printf ("MOD\n");
       break;
-    case NUM:
+    case NUMBER:
       printf ("%d\n", tval);
       break;
     case ID:
@@ -27,5 +24,3 @@ emit (int t, int tval)
       printf ("token %d , tokenval %d\n", t, tval);
     }
 }
-
-

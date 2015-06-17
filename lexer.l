@@ -1,9 +1,11 @@
 %{
   #include <stdio.h>
-  #include "global.h"
+  #include "parser.h"
 
   int tokenval = NONE;
   int lineno = 1;
+
+  extern YYSTYPE yylval;
 
 %}
 %option noyywrap
@@ -19,8 +21,8 @@ ID        {ALPHA}{ALNUM}*
 
 {DIGIT}+	           {
         // printf("DIGIT: %d\n", yytext);
-        tokenval = atoi(yytext);
-        return NUM;
+        yylval = atoi(yytext);
+        return NUMBER;
   		}
 
 {ID} {
@@ -29,7 +31,7 @@ ID        {ALPHA}{ALNUM}*
       if (p == 0) {
         p = insert (yytext, ID);
       }
-      tokenval = p;
+      yylval = p;
       return symtable[p].token;
 		}
 
@@ -43,7 +45,7 @@ ID        {ALPHA}{ALNUM}*
 {IGNORE}*   { /*ignore*/ }
 
 .            {
-    tokenval = NONE;
+    yylval = NONE;
     return yytext[0];
 }
 

@@ -1,15 +1,13 @@
-#include "global.h"
-struct entry keywords[] = { 
-  {"div", DIV}, 
-  {"mod", MOD}, 
-  {0, 0} 
+#include "parser.h"
+
+struct entry keywords[] = {
+  {"div", DIVTOKEN},
+  {"mod", MODTOKEN},
+  {0, 0}
 };
-void
-init () 
-{
+
+void init () {
   struct entry *p;
   for (p = keywords; p->token; p++)
     insert (p->lexptr, p->token);
 }
-
-
